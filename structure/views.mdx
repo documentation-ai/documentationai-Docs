@@ -1,0 +1,132 @@
+---
+title: "Views"
+description: "Understand views (tabs and dropdowns), how they relate to dimensions and content, and how to choose and manage navigation patterns in the Web Editor."
+---
+
+## Overview
+
+Views control how content is organized and navigated within a Dimension context in Documentation.AI.
+
+- Dimensions decide which content is in scope (for example, product, audience, or version).
+- Views decide how that scoped content appears in the UI (Tabs, Sidebar Dropdowns, and how they nest).
+- Content items (Groups, Pages, Page Groups, OpenAPI References) live inside Views to form your navigation tree.
+You work with views in two places: in the Web Editor, when you organize navigation for a project; and in site configuration, when you define views and patterns programmatically (see Site configuration).
+
+- Think of a dimension as a filter on content, and a view as the layout for navigating that filtered content.
+## Supported view types
+
+Documentation.AI supports two view types at the layout layer:
+
+- Tabs: horizontal, top-level navigation areas.
+- Dropdowns: collapsible sidebar categories.
+Both types act as containers for content or other containers.
+
+### Tabs
+
+Tabs are top-level navigation sections such as Guides, API Reference, or Changelog. Use Tabs when you have 2–5 major sections readers switch between often, each section needs its own navigation branch, and you want clear separation between content types (Guides vs API) or audiences (Developers vs Admins). Switching Tabs changes the active navigation branch and typically changes what appears in the sidebar.
+
+### Dropdowns
+
+Dropdowns are collapsible sidebar categories such as Getting Started, Integrations, or SDKs. Use Dropdowns when the sidebar is long and needs clear categories, you need hierarchy inside a section, and you want readers to drill down through categories. A Dropdown is a container: it reveals child items when expanded. Dropdowns can nest, but keep nesting shallow in most docs.
+
+## Two starting states: with Dimensions vs without Dimensions
+
+Your project can be organized in either of these ways:
+
+- With Dimensions: you first select a Dimension value (for example, Version: v1.0), then build Views inside it.
+- Without Dimensions: there is only one global navigation tree, and you build Views directly at the root.
+The Editor supports both. The steps for adding Views change slightly depending on which starting state you’re in.
+
+## Working with Views in the Web Editor
+
+Before you start, choose the correct branch: open Editor then Navigation. If you see Product/Version/Language selectors, your project has Dimensions. If you don’t, you’re editing a single global navigation tree. Confirm you’re editing the right branch by switching the available selectors and verifying the navigation tree changes as expected.
+
+### How layering works (Parent vs Child)
+
+- Add Parent layer (top “+”): wraps the current level in a new container and moves existing items under it. Use when you want to restructure everything at that level.
+- Add Child layer (bottom/inline “+”): adds a new container only inside the selected item. Use when you want to restructure only that section.
+- Layers can wrap Views or Content, but Views can’t be added above Dimensions.
+### Scenario 1: Add Views when your project has Dimensions
+
+1. Select the correct Dimension branch: open the Editor and go to the Navigation panel. Select the Dimension value you want to edit (for example, Version: v1.0). Confirm you’re in the right branch by switching Dimension values and verifying the sidebar content changes. You always add Views inside the selected Dimension branch.
+2. Add Tabs or Dropdowns using layers: use Add Parent layer when you want to wrap the current level and introduce a new container above it; use Add Child layer when you only want to add structure inside the selected item. Then choose either Add Tabs or Add Dropdowns.
+3. Name and add sibling Views: name the first tab/dropdown item clearly. The Editor moves your existing content under the new View layer automatically. Add more sibling tabs/dropdowns at the same level.
+4. Confirm placement: switch between tabs/dropdowns and confirm you see the expected content under each. If content moved unexpectedly, you likely used Parent where you intended Child (or vice versa).
+### Scenario 2: Add Views when your project has no Dimensions
+
+When there are no Dimensions, you are editing a single global navigation tree. Views are added directly at the root (or inside any existing View). Start at the root navigation, introduce Views at the root using Add Parent layer to wrap the existing root content, choose Add Tabs or Add Dropdowns, then validate by switching between newly created tabs/dropdowns and confirming content is split as intended.
+
+### Adding Views inside existing Views (nested Views)
+
+Once a View exists, you can add another View underneath it, as long as the one-child rule is respected. Common examples: add Dropdowns under a Tab to create sidebar categories; nest Dropdowns inside a Dropdown for sub-categories; add Tabs inside a Dropdown only if your intended pattern supports it. If an “Add Tabs” or “Add Dropdowns” option is missing, it usually means adding it there would violate the one-child rule.
+
+### How Views connect to Groups and Pages in the sidebar
+
+After you select a branch (for example: Version: v1.0, Tab: Guides, Dropdown: Integrations), the sidebar shows the content level for that branch. If that branch uses Groups, you’ll see a Groups section and add pages inside a group. If that branch is flat, you’ll see a Pages section and add pages at the top level. Views determine where you are in the navigation tree; Groups/Pages determine what content exists inside that branch.
+
+## Core rules for Views
+
+### 1) Views never contain Dimensions
+
+Dimensions (when used) are always the outermost layer of the navigation tree. You can add a View as a parent for another View or for Content, but you cannot add a View as a parent for Dimensions.
+
+### 2) The one-child rule
+
+Every container can contain exactly one child type. A Tab can contain only one of: Pages, Groups, or Dropdowns. A Dropdown can contain only one of: Pages, Groups, Tabs, or Dropdowns. You cannot mix child types at the same level. This is why the Web Editor hides “Add …” options at certain levels — it only shows actions that keep the tree valid.
+
+### 3) Common supported nesting patterns
+
+The standard UI templates support these patterns: Pattern 1 (Dropdown then Tabs then Dropdown) for complex, category-first navigation with sub-sections; Pattern 2 (Dropdown then Dropdown) for a pure hierarchical sidebar without horizontal tabs; Pattern 3 (Tabs then Dropdown then Dropdown) for tabbed sections each with their own nested categories. In each pattern, tabs and dropdowns act as the layout containers, and groups and pages are the leaf-level content under those views.
+
+## Content pages on views
+
+By default, tabs and dropdowns are purely structural — they organize content but do not have pages of their own. You can attach a content page to any tab or dropdown, which gives the view its own MDX-backed page with a unique path.
+
+### When to attach a content page to a view
+
+- Tab landing pages: give each tab an overview page that introduces its section.
+- Dropdown hub pages: a dropdown for "Integrations" could have a content page listing supported integrations with a CollectionList component.
+- Breadcrumb navigation: when a view has a content page, it appears as a clickable link in the breadcrumb trail.
+- Content pages on views are optional. Add one when readers would benefit from an entry point or overview for the section.
+### Add a content page in the Web Editor
+
+1. In the editor sidebar, click the menu icon next to the tab or dropdown name.
+2. Select Attach Content Page.
+3. Enter a path (slug) for the page, or browse unpublished pages to reuse an existing MDX file.
+4. The view now opens its content page when clicked. Write your content or add Collection components.
+### Add a content page in configuration
+
+Add a path property to the tab or dropdown entry in documentation.json. For example, a tab entry can include a `path` such as `api/overview` alongside its `groups`, and the same approach works for dropdowns by adding a `path` to the dropdown entry.
+
+### How content pages affect view behavior
+
+- The view label in the navbar or sidebar becomes a navigable link to the content page.
+- Switching between tabs still changes the active navigation branch as before.
+- The content page appears in breadcrumb navigation, search results, and AI features.
+- Access control settings on the view are inherited by its content page.
+### Display options
+
+Content pages on views support the same display options as regular pages: badge, show-sidebar, show-toc, show-parent-label, content-width, show-page-navigation, and ask-feedback. You can also set method and tags for API-oriented views. See Page Configuration for the full list.
+
+### Detach a content page
+
+In the Web Editor, open the view settings and click Detach Content Page. In configuration, remove the path property. The MDX file remains as an unpublished page.
+
+## Design guidelines and common patterns
+
+### When to use tabs vs dropdowns
+
+Use tabs when you need clear, top-level separation between modes, audiences, or content types; you have 2–5 major sections; and you want the sidebar structure to reset depending on the active section. Use dropdowns when you are organizing related content within a single section or tab, the sidebar is long enough that scannability becomes an issue, or you need 2–3 levels of hierarchy. If unsure, default to a small number of tabs at the top level with dropdowns in the sidebar under each tab.
+
+### Choosing a nesting pattern
+
+- Pattern 1 (Dropdown then Tabs then Dropdown): users first choose a high-level area in the sidebar, then need multiple parallel sections exposed as tabs, each with its own dropdown-based sidebar.
+- Pattern 2 (Dropdown then Dropdown): your project is small or focused enough that tabs are not necessary and you want a single continuous sidebar with hierarchical categories.
+- Pattern 3 (Tabs then Dropdown then Dropdown): a good default for most medium-to-large documentation sets.
+### Consistency and maintenance tips
+
+- Align across dimensions: keep the tab labels and dropdown structure consistent across versions to reduce cognitive load.
+- Minimize depth: prefer no more than two dropdown levels deep in most projects.
+- Name views by user intent: prefer Getting Started over Onboarding Docs; prefer API Reference over Backend.
+- Plan before implementing: sketch your dimension, view, and content hierarchy before editing navigation.
+For concrete field names and configuration examples, see Dimensions, Groups, Pages, and Site configuration.
