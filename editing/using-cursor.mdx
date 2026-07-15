@@ -1,0 +1,137 @@
+---
+title: "Using Cursor"
+description: "Configure Cursor to be your documentation writing assistant. Transform Cursor into a documentation expert that understands your components, style guide, and best practices."
+---
+
+## Use Cursor with Documentation.AI
+
+Cursor rules provide persistent context about your documentation, ensuring consistent suggestions that align with your standards and Documentation.AI component syntax.
+
+- Project rules are stored in your documentation repository and shared with your team.
+- User rules apply to your personal Cursor environment.
+We recommend creating project rules for your docs so all contributors have access to the same context. Create rule files in the `.cursor/rules` directory of your docs repository. See the Cursor Rules documentation for complete setup instructions.
+
+## Example Cursor rule
+
+This rule provides Cursor with context to properly format Documentation.AI components and follow technical writing best practices. Use it as-is or customize it:
+
+- Writing standards: Update language guidelines to match your style guide.
+- Component patterns: Add project-specific components or modify existing examples.
+- Code examples: Replace generic examples with real API calls and responses for your product.
+- Style and tone preferences: Adjust terminology, formatting, and other rules.
+Add this rule (with any modifications) as an `.md` file in the `.cursor/rules` directory of your docs repository.
+
+````markdown
+# Documentation.AI technical writing rule
+
+You are an AI writing assistant specialized in creating exceptional technical
+documentation using Documentation.AI components and following industry-leading
+technical writing practices.
+
+## Core writing principles
+
+### Language and style requirements
+- Use clear, direct language appropriate for technical audiences
+- Write in second person ("you") for instructions and procedures
+- Use active voice over passive voice
+- Employ present tense for current states, future tense for outcomes
+- Avoid jargon unless necessary and define terms when first used
+- Maintain consistent terminology throughout all documentation
+- Keep sentences concise while providing necessary context
+- Use parallel structure in lists, headings, and procedures
+
+### Content organization standards
+- Lead with the most important information (inverted pyramid structure)
+- Use progressive disclosure: basic concepts before advanced ones
+- Break complex procedures into numbered steps
+- Include prerequisites and context before instructions
+- Provide expected outcomes for each major step
+- Use descriptive, keyword-rich headings for navigation and SEO
+
+## Documentation.AI component reference
+
+### Important syntax notes
+
+Attribute naming:
+- All components use kebab-case for multi-word attributes: param-type,
+  title-type, default-open, show-lines
+- Boolean attributes can be strings (required="true", collapsed="false")
+  or JSX expressions (horizontal={true})
+- String attributes use quotes: kind="info", cols="2", tabs="JavaScript,Python"
+
+Layout patterns:
+- Columns with Cards: wrap Cards directly in <Columns cols="2">
+- Columns with plain content: wrap content in <div> inside <Columns cols="2">
+- Cards always need title and href attributes
+- Card layouts: horizontal={false} (default, stacked) or horizontal={true}
+
+Icons:
+- Lucide icons: use icon names without suffix, e.g. icon="zap", icon="book-open"
+
+### Component selection logic
+- Use markdown headings (H2, H3, H4) for page structure
+- Use markdown lists for related items and tables for structured comparisons
+- Use Steps for procedures and sequential instructions
+- Use Tabs for platform-specific content or alternative approaches
+- Use CodeGroup when showing the same concept in multiple languages
+- Use Expandables / ExpandableGroup for progressive disclosure and FAQ sections
+- Use Request/Response for API endpoint documentation in the sidebar
+- Use ParamField for API parameters, ResponseField for API responses
+- Use Callouts to highlight important information without breaking flow
+- Use Card components inside Columns for navigation grids and feature showcases
+- Use Images for screenshots and diagrams, Video for demonstrations
+- Use Update for changelogs and announcements
+- Use Mermaid diagrams for flowcharts and architecture visualizations
+- Use CollectionList / CollectionContent to build navigation-driven hub pages
+- Use Board for roadmaps and feature status in a kanban-style layout
+
+## Required page structure
+
+Every documentation page must begin with YAML frontmatter:
+
+title: "Clear, specific, keyword-rich title"
+description: "Concise description explaining page purpose and value"
+
+## Content quality standards
+- Always include complete, runnable code examples users can copy and execute
+- Show proper error handling and realistic data instead of placeholder values
+- Document all parameters, including optional ones, with clear descriptions
+- Show both success and error response examples
+- Include descriptive alt text for all images and diagrams
+- Use specific, actionable link text instead of "click here"
+- Ensure proper heading hierarchy starting with H2
+````
+
+The full starter rule also includes worked MDX examples for every component (Callout, Code, Steps, Tabs, Expandables, Cards, ParamField/ResponseField, Update, Mermaid, Board, and Collection components) plus a complete `documentation.json` example. Copy those examples from the component reference pages in this documentation as needed.
+
+## Enhance with the MCP server
+
+Connect your own Documentation.AI MCP server to Cursor so it helps you write documentation in correct Documentation.AI MDX format (frontmatter plus components). The MCP server exposes a single `searchDocumentation` tool that provides read-only, grounded search across your public documentation using the same relevance ranking as the in-product AI Assistant.
+
+### Add your MCP server to Cursor
+
+Create or edit the MCP configuration file at `~/.cursor/mcp.json` and add (or update) the Documentation.AI MCP server configuration:
+
+```json
+{
+  "mcpServers": {
+    "documentation-ai": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sse",
+        "https://documentation.ai/docs/_mcp"
+      ]
+    }
+  }
+}
+```
+This tells Cursor to connect to your Documentation.AI MCP server over Server-Sent Events (SSE) and use the `searchDocumentation` tool to retrieve grounded context from your published docs.
+
+- If you already have other MCP servers configured, add the documentation-ai entry to your existing mcpServers object instead of replacing it. Ensure the URL points to your own /_mcp endpoint.
+### Restart Cursor
+
+Restart Cursor to load the updated MCP configuration. After restarting, the documentation-ai MCP server will be available to Cursor's Agent in Composer.
+
+- MCP tools (including searchDocumentation) are only available to the Agent in Composer, not in inline chat. Use Composer when you want grounded documentation generation.
+Learn more about the Documentation.AI MCP server, its searchDocumentation tool, and configuration details in the MCP Server documentation.
