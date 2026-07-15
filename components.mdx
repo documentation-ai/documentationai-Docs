@@ -1,143 +1,108 @@
 ---
-title: Components (Sample)
-description: A small showcase of the built-in MDX components with usage guidelines.
+title: "Components"
+description: "Explore the full library of Documentation.AI components for building rich, interactive documentation pages. Documentation.AI provides a library of components that extend standard Markdown with interactive, structured, and visual elements. You can insert any component through the web editor's slash-command menu or write it directly in MDX."
 ---
-## Quick component tours.
 
-<Board uid="dab93188-d9ab-4995-af6c-317aaa4d7c4e" title="Product Roadmap — Q3 2025">
-  <BoardColumn title="Planned" uid="28de132c-0941-447f-b5cd-615c78cc3719">
-    <BoardCard title="Multi-language support" uid="661803cd-3d0e-4f80-ae64-98a28783f81c" description="Add i18n framework with initial support for Spanish, French, and German." due-date="2025-08-15" author="Platform Team" created-at="2025-06-01" />
+- Every component page below covers both the visual editor workflow and the
+- MDX syntax, so you can use whichever authoring approach you prefer.
+## Content Fundamentals
 
-    <BoardCard title="Custom domain SSL" uid="a9d8b26e-22d0-4433-bfe0-d0f8f0971590" description="Automatic SSL certificate provisioning for custom domains via Let's Encrypt." due-date="2025-07-31" author="Infrastructure Team" created-at="2025-06-03" />
+The basic building blocks of every documentation page: text, structured data, and code.
 
-    <BoardCard title="Webhook event filtering" uid="f3a21c74-8b19-4e55-a0c2-7d6e9f8b1234" description="Allow users to subscribe to specific event types instead of receiving all webhooks." due-date="2025-08-01" author="API Team" created-at="2025-06-08" />
+Headings and Text Lists and Tables
 
-    <BoardCard title="Role-based access control" uid="c7e48a91-5d32-4f10-b8a7-2e9c6d4f5678" description="Granular permissions system with predefined roles (Admin, Editor, Viewer) and custom role creation." due-date="2025-09-01" author="Security Team" created-at="2025-06-10" />
-  </BoardColumn>
+Structure pages with headings, Organize information with ordered
 
-  <BoardColumn title="In Progress" uid="7e3d010d-940d-48dc-b762-bde709c455e1" color="5">
-    <BoardCard title="Real-time collaboration" uid="0d5c0fd8-3ef4-46d7-bb4e-16ab448dc798" description="Live cursors and conflict-free editing for teams working on the same page. simultaneously." due-date="2025-07-15" author="Core Team" created-at="2025-05-15" />
+paragraphs, inline formatting, and lists, unordered lists, and data tables.
 
-    <BoardCard title="API rate limiting dashboard" uid="b2d94e17-6a83-4c29-9f01-3e8a7b5c9012" description="Visual dashboard showing current usage, limits, and historical rate-limit hits per API key." due-date="2025-07-10" author="API Team" created-at="2025-05-20" />
+- links.
+- Code and Groups
+- Display syntax-highlighted code blocks and tabbed multi-language examples.
+## Layout and Navigation
 
-    <BoardCard title="Dark mode theming" uid="e8f15c23-4a67-4d89-b2c1-9f0e3d7a4567" description="Full dark mode support with automatic OS preference detection and manual toggle." due-date="2025-07-20" author="Design Team" created-at="2025-05-28" />
-  </BoardColumn>
+Control how content is arranged on the page and help readers navigate between sections.
 
-  <BoardColumn title="In Review" uid="d4a72f38-1b95-4e6c-8d23-5c9f0a1b3456">
-    <BoardCard title="Search improvements" uid="a1b2c3d4-5e6f-7a8b-9c0d-1e2f3a4b5678" description="Fuzzy matching, typo tolerance, and search result ranking based on page popularity." due-date="2025-06-30" author="Platform Team" created-at="2025-05-01" />
+Card Columns
 
-    <BoardCard title="CSV/JSON bulk import" uid="f9e8d7c6-b5a4-3210-fedc-ba9876543210" description="Upload structured data files to auto-generate documentation pages with field descriptions." due-date="2025-07-01" author="Core Team" created-at="2025-05-10" />
-  </BoardColumn>
+Create navigation hubs and feature Arrange content in responsive multi-
 
-  <BoardColumn title="Shipped ✓" uid="bc1a0363-c34a-4444-ac7a-86792a7eae60">
-    <BoardCard title="OpenAPI 3.1 support" uid="1a2b3c4d-5e6f-7890-abcd-ef1234567890" description="Full support for OpenAPI 3.1 specs including webhooks and JSON Schema 2020-12." due-date="2025-05-31" author="API Team" created-at="2025-04-01" />
+highlights with icons, images, and column grid layouts.
 
-    <BoardCard title="SSO via SAML" uid="2b3c4d5e-6f78-90ab-cdef-123456789abc" description="Enterprise single sign-on with SAML 2.0, supporting Okta, Azure AD, and OneLogin." due-date="2025-05-30" author="Security Team" created-at="2025-03-15" />
+- CTAs.
+Collection List Collection Content
 
-    <BoardCard title="Page analytics" uid="3c4d5e6f-7890-abcd-ef12-34567890abcd" description="Per-page view counts, average time on page, and scroll-depth tracking in the dashboard." due-date="2025-06-01" author="Platform Team" created-at="2025-04-10" />
-  </BoardColumn>
-</Board>
+Auto-generate card, accordion, list, or Display a full nested navigation tree
 
-<Callout kind="info" collapsed="false">
-  These are example components from Documentation.AI. Use them to make pages easier to scan.
-</Callout>
+link layouts from your navigation tree. as a collapsible accordion.
 
-<Columns cols="3">
-  <Card title="Callout" href="/components/callouts" icon="info" horizontal="false">
-    Use for tips, warnings, and important notes.
-  </Card>
+## Media and Visuals
 
-  <Card title="Steps" href="/components/steps" icon="check-circle" horizontal="false">
-    Break tasks into easy, numbered actions.
-  </Card>
+Enrich your documentation with images, video, and diagrams.
 
-  <Card title="Tabs" href="/components/tabs" icon="layers" horizontal="false">
-    Keep alternate examples tidy.
-  </Card>
-</Columns>
+Images Videos and Iframes
 
-### Callout: usage tips
+Add optimized, CDN-delivered Embed YouTube, Vimeo, Loom
 
-**When to use**
+images with responsive sizing and alt videos, or any external content via
 
-- Highlight important warnings or constraints that affect success
+text. iframe.
 
-- Call out tips that save time or prevent common mistakes
+- Mermaid Diagrams
+- Create interactive flowcharts, sequence diagrams, and other visuals from code.
+## Interactive and Structural
 
-- Emphasize prerequisites, permissions, or irreversible actions
+Guide readers through content with progressive disclosure, step-by-step flows, and highlighted information.
 
-**When not to use**
+Callout Expandables
 
-- For every minor detail; overuse makes real warnings easy to ignore
+Highlight tips, warnings, alerts, and Hide detailed content behind
 
-- As a replacement for clear prose and headings
+other important notes without collapsible sections for progressive
 
-- To hide critical blocking information at the bottom of a long page
+breaking reading flow. disclosure.
 
-## Steps (sample)
+Steps Tabs
 
-<Steps>
-  <Step title="Add a heading" icon="type" title-type="p">
-    Start each page with a clear, short title.
-  </Step>
+Display sequential instructions with Organize alternative content into a
 
-  <Step title="Explain the goal" icon="target" title-type="p">
-    Tell readers what they will achieve.
-  </Step>
+numbered steps, icons, and tabbed interface with smooth
 
-  <Step title="Link to next steps" icon="arrow-right" title-type="p">
-    Point to the next page they should read.
-  </Step>
-</Steps>
+connecting lines. transitions.
 
-### Steps: usage tips
+Board Update
 
-**When to use**
+Present roadmaps, feature status, and Create timeline-style changelog
 
-- Readers must follow actions in a specific order
+release plans in a kanban-style entries with labels, dates, and tags.
 
-- You describe tasks that can be completed in one sitting
+- column layout.
+## API Documentation
 
-- You want to separate conceptual explanation from hands-on actions
+Purpose-built components for documenting API endpoints, parameters, and responses.
 
-**When not to use**
+Param Field Response Field
 
-- For unordered checklists where sequence does not matter
+Document API parameters with Document API response fields with
 
-- To document background concepts or architecture
+location badges, types, and required types, nesting, and status badges.
 
-- For long, branching workflows that need their own dedicated guide
+- or deprecated indicators.
+- API Components
+- Display request and response examples in a two-column layout with sticky sidebar.
+## Choosing the right component
 
-## Tabs (sample)
-
-<Tabs>
-  <Tab title="CLI" icon="terminal">
-    ```bash
-    docs init my-project
-    docs dev
-    ```
-  </Tab>
-
-  <Tab title="UI" icon="mouse-pointer">
-    Open the editor, choose a page, and start writing.
-  </Tab>
-</Tabs>
-
-### Tabs: usage tips
-
-**When to use**
-
-- You show the same idea in multiple languages or platforms
-
-- You provide alternate setup paths, such as CLI versus UI
-
-- You want to keep short variants in one compact section
-
-**When not to use**
-
-- When one variant is strongly recommended over the others
-
-- For long, independent flows that deserve separate pages
-
-- When content differs so much that readers must read all variants anyway
-
+- Page structure and text formatting — Headings and Text, Lists and Tables
+- Code examples in one or more languages — Code and Groups
+- Step-by-step procedures — Steps
+- Platform-specific or alternative content — Tabs
+- Supplementary information or warnings — Callout
+- Hiding details until needed — Expandables
+- Navigation grids and feature showcases — Card inside Columns
+- Auto-generated section landing pages — Collection List or Collection Content
+- API parameter and response documentation — Param Field, Response Field, and API
+- Components
+- Screenshots and visual aids — Images
+- Video walkthroughs — Videos and Iframes
+- Architecture and flow diagrams — Mermaid Diagrams
+- Roadmaps and feature status — Board
+- Release notes and changelogs — Update
