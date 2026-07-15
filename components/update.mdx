@@ -1,0 +1,98 @@
+---
+title: "Update"
+description: "Display changelog entries, version updates, and product announcements with labeled sections and timeline layouts."
+---
+
+## Overview
+
+The Update component creates clean, timeline-style blocks with a label on the left (date, version, or tag) and rich content on the right. It’s perfect for:
+
+- Release notes and changelog entries
+- Product or feature announcements
+- Version upgrade/deprecation notices
+- Roadmap milestones or status updates
+You can use Updates in two ways:
+
+- Editor UI: Insert and edit Update blocks visually (no code needed).
+- MDX: Use the `<Update>` component with label, description, and tags props.
+## Using with Web Editor
+
+### Add an Update block
+
+1. Place your cursor where you want the update.
+2. Type / to open the Search and Add menu.
+3. Search for Update and select it.
+4. A new update is created with the current date as the label.
+### Write update content
+
+- Click in the content area to the right of the label (where it says Type here…).
+- Start writing your update.
+- You can add any rich content here: text, headings, bullet or numbered lists, images, videos, tables, code blocks, callouts, cards, steps, tabs, etc.
+Each Update block is just like a regular content section, styled as a changelog row.
+
+- Prefer writing in code?
+- You can switch to MDX view inside the Web Editor to write or edit this component using the same syntax as the Code Editor.
+### Edit label, description, and tags
+
+1. On the right side of the Update block, click the three-dot menu.
+2. The Update Settings panel opens with:
+- Label: The main tag shown on the left (for example, 2025-12-11 or v2.3.0 ). Keep a consistent format across updates (for product updates, dates usually work best).
+- Description: A short note shown under the label (for example, New, Patch, v2.3.0, or Performance improvements ).
+- Tags – Optional tags for each update. Type multiple tags separated by commas, e.g. Bug fix, New.
+Click Save to apply the changes.
+
+### Create a timeline of updates
+
+- Add multiple Update blocks, one after another, to build a changelog timeline.
+- Use labels (dates or versions) + tags (e.g. New, Bug fix, Breaking ) to help readers quickly scan what changed and when.
+## Using with Code Editor
+
+### Basic syntax
+
+Use the `<Update>` component to create changelog entries with labels and descriptions:
+
+````jsx
+<Update label="2024-10-15" description="v1.2.0">
+  Released new analytics dashboard with real-time metrics and custom reporting.
+</Update>
+````
+### Tags
+
+Add optional tags to categorize and label updates. The tags prop accepts an array of strings, for example `tags={["breaking", "security", "performance"]}`. Use tags to highlight update categories like "breaking", "feature", "bugfix", "security", or "deprecated".
+
+### Rich content
+
+Updates support all MDX components including code blocks, images, cards, callouts, columns, and other components nested inside the `<Update>` block.
+
+### Sequential updates
+
+Stack multiple `<Update>` blocks one after another to create a changelog timeline. The sidebar uses sticky positioning on desktop to remain visible while scrolling through long updates.
+
+## Advanced options
+
+### Attributes
+
+path label string Required
+
+The primary label displayed in the sidebar. Typically used for dates (YYYY-MM-DD format) or version identifiers.
+
+path description string Required
+
+Supporting description displayed below the label. Commonly used for version numbers, release types, or brief categorizations.
+
+path tags array
+
+Optional array of tag strings to categorize the update. Tags display as small badges below the label and description.
+
+path children node Required
+
+The main content of the update. Supports all MDX content including headings, text, code blocks, images, cards, callouts, and other components.
+
+Common patterns:
+
+- Release changelog: Dates as labels, versions as descriptions, with tags like feature, bugfix, and breaking.
+- Product announcements: Feature name or launch date as label, tags like New or Improvement.
+- API changes: Version labels plus tags like deprecated, security, or migration.
+- Security notices: Use tags such as security and critical for quick scanning.
+- Roadmap highlights: Milestones labeled by quarter or date, with tags such as Planned, In progress, Released.
+- Combine Update blocks with Cards, Callouts, Steps, and Tabs to build rich changelog and announcement pages that are easy to scan and delightful to read.

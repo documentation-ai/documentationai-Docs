@@ -1,0 +1,60 @@
+---
+title: "Collection Content"
+description: "Reference for the CollectionContent component that displays the full nested tree under a navigation node as a collapsible accordion structure."
+---
+
+## Overview
+
+CollectionContent renders the full nested tree under a navigation node as a recursive, collapsible accordion. Instead of showing only direct children, it displays the complete hierarchy at all levels so readers can drill down through multiple layers of your navigation.
+
+Use CollectionContent to:
+
+- Display a nested table of contents for an entire section as a collapsible tree
+- Build reference or help center pages where readers need to see everything at a glance
+- Keep navigation-driven content in sync automatically as you add or remove pages
+You can add the component in two ways:
+
+- Web Editor – Insert from the slash menu under the Dynamic category.
+- Code Editor (MDX) – Use the `<CollectionContent>` component directly.
+- Collection components read your live navigation structure. When you add, remove, or reorder pages in a group, the collection updates automatically on your next deploy. Because they resolve against your actual navigation tree, they cannot be previewed as static examples on this page — add one to a page in your own project to see it in action.
+## Understanding the node attribute
+
+The node attribute tells the component which navigation node's full tree to display.
+
+The node value is a path that walks your navigation tree using the format type:name, separated by / for each level. For example: `tabs:Guides` targets the tab named "Guides"; `tabs:API/groups:Authentication` targets the "Authentication" group inside the "API" tab; `groups:Getting Started` targets the group named "Getting Started"; `dropdowns:Platform/tabs:REST` targets the "REST" tab inside the "Platform" dropdown.
+
+The component resolves the node at render time and displays its full descendant tree.
+
+- In the Web Editor, you do not need to write the node path manually. The slash menu opens a visual navigation tree picker where you select the target node by clicking.
+## Using with Web Editor
+
+1. Place your cursor on a new line.
+2. Type / and search for Collection Content.
+3. Select Collection Content from the Dynamic category.
+4. A navigation tree picker opens. Select the target node.
+5. The component is inserted. Click the edit icon to toggle the default expansion state.
+## Using with Code Editor
+
+Use `<CollectionContent node="tabs:Guides" default-expanded={false} />`. Container nodes (groups, tabs, dropdowns) render as collapsible sections with a chevron. Leaf pages render as clickable links. The tree indents at each level for visual clarity.
+
+## Attribute reference
+
+path node string Required
+
+Navigation node path in type:name/type:name format. Identifies which node's full tree to display.
+
+path default-expanded boolean
+
+Whether all tree nodes start expanded. Defaults to false (collapsed).
+
+## When to use CollectionContent vs CollectionList
+
+- Landing page for a section with a few groups: CollectionList with cards layout.
+- Quick navigation links in a sidebar or footer: CollectionList with links layout.
+- FAQ-style browsing of a section: CollectionList with accordion layout.
+- Full table of contents for a deep section: CollectionContent.
+- Displaying only direct children, not nested items: CollectionList.
+- Displaying the entire hierarchy at all levels: CollectionContent.
+## Best practices
+
+Point to container nodes, not pages: collection components display children of a container (group, tab, dropdown). Pointing to a leaf page produces an empty result. Keep the target section well-organized because collections mirror your navigation structure, so a clean hierarchy of groups and pages produces a clean layout. Use CollectionContent sparingly — full-tree rendering is most useful for reference sections or help centers where readers need to see everything at a glance. For most docs, CollectionList is the better default. Combine with content pages on containers: if your groups or tabs have content pages attached, you can use a CollectionContent on that content page to create a self-maintaining hub.
