@@ -1,0 +1,146 @@
+---
+title: "Board"
+description: "Reference for creating kanban-style layouts with the Board component, including visual editing, MDX syntax, card attributes, and column colors."
+---
+
+## Overview
+
+Use the Board component to publish roadmap-style layouts that help readers understand what is planned, what is in development, and what has already shipped. It works best when you need to communicate progress, timelines, or feature availability in a format that readers can scan quickly. Common uses include:
+
+- Product roadmaps
+- Feature status pages
+- Release planning
+- API versioning status
+- Deprecation timelines
+- Platform capability overviews
+A board contains one or more BoardColumn components, and each column contains self-closing BoardCard components. In the Web Editor, boards are interactive, so you can reorder columns and move cards between columns with drag and drop.
+
+## Using with Web Editor
+
+Use the Web Editor when you want to build or update boards visually. It is the fastest way to add columns, rearrange cards, and adjust presentation without writing MDX.
+
+- The Web Editor is the recommended way to manage boards. Drag-and-drop reordering, visual settings for columns, and card editing are easier there than editing raw MDX by hand.
+### Insert a board
+
+Add a board from the slash menu:
+
+- Open the slash menu: in an empty block, type /board and select Board.
+- Add your first columns: start by naming the columns you want to show, such as Planned, In development, and Shipped. After you create the board, the editor shows each column as a separate lane.
+- Add cards to each column: add cards inside a column to represent tasks, roadmap items, checklist steps, or any other unit of content. Each card can include a title and optional details such as a description, icon, due date, author, or created date.
+### Manage columns and cards
+
+Once the board is on the page, you can update it directly in the editor.
+
+- Reorder columns by dragging a column to a new position.
+- Move cards between columns by dragging a card into another column.
+- Add a column with the board's add-column control.
+- Add cards within any column.
+- Edit column settings to change the title, color, and icon.
+- Edit card settings to change the title, description, icon, due date, and author.
+These controls make boards useful for content that changes often, such as product roadmaps, feature status pages, or release timelines.
+
+## Using with Code Editor
+
+Use the Code Editor when you want full control over the MDX structure or when you manage documentation in Git.
+
+### Basic syntax
+
+A minimal board has a Board wrapper, one or more BoardColumn children, and self-closing BoardCard items inside each column.
+
+```jsx
+<Board title="Product roadmap">
+  <BoardColumn title="Planned" color="3" icon="check-circle">
+    <BoardCard title="Webhook support" />
+    <BoardCard title="Bulk export API" />
+  </BoardColumn>
+  <BoardColumn title="In Development" color="5" icon="play-circle">
+    <BoardCard title="Dark mode" />
+  </BoardColumn>
+  <BoardColumn title="Shipped" color="4" icon="rocket">
+    <BoardCard title="SSO with SAML" />
+  </BoardColumn>
+</Board>
+```
+### Detailed example
+
+Use card attributes when the roadmap needs more context than a title alone. Each `<BoardCard>` supports title, description, icon, due-date, author, and created-at attributes.
+
+### Attribute naming in MDX
+
+Some board attributes use kebab-case in MDX.
+
+- Write card date props as due-date and created-at in MDX. These map to the underlying camelCase fields used internally.
+## Props and attributes reference
+
+### Board
+
+Board is the top-level wrapper for the entire layout.
+
+body title string
+
+Title for the board region. If you omit it, the component defaults to Board.
+
+### BoardColumn
+
+BoardColumn defines a single column inside the board.
+
+body title string Required
+
+Column heading shown at the top of the column.
+
+body color integer
+
+Column color index from 0 to 8. If you provide a higher number, the color cycles through the available palette.
+
+body icon string
+
+Lucide icon name shown with the column title.
+
+### BoardCard
+
+BoardCard is a self-closing component used inside a BoardColumn.
+
+body title string Required
+
+Primary card label.
+
+body description string
+
+Additional context shown inside the card.
+
+body icon string
+
+Lucide icon name shown on the card.
+
+body due-date string
+
+Due date associated with the card. Use a date string such as 2025-02-01.
+
+body author string
+
+Person associated with the card.
+
+body created-at string
+
+Creation date for the card. Use a date string such as 2025-01-15.
+
+## Column colors
+
+Use the color attribute on BoardColumn to apply one of nine built-in color styles.
+
+Index Color
+
+0 gray, 1 brown, 2 orange, 3 yellow, 4 green, 5 blue, 6 purple, 7 pink, 8 red
+
+If you provide a color index above 8, the component wraps back through the palette.
+
+## Best practices and tips
+
+- Use boards when readers benefit from seeing progression or categorization at a glance. Keep column titles short, keep card titles scannable, and move supporting detail into the card description only when the extra context helps the reader make a decision.
+A few patterns work especially well:
+
+- Limit each board to a single organizing principle. Organize by delivery stage, such as planned, building, and shipped, or by time horizon, such as this quarter, next quarter, and future.
+- Keep columns stable. Readers understand a roadmap faster when the column structure does not change often.
+- Use icons sparingly. Icons help when they reinforce meaning, but too many icons make the board harder to scan.
+- Prefer the Web Editor for frequent updates. It is faster for rearranging content and adjusting presentation.
+- Use dates consistently. If one card shows due dates or created dates, consider applying the same pattern across similar cards.

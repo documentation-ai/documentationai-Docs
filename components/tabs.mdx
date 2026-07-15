@@ -1,38 +1,111 @@
 ---
-title: Tabs
-description: Organize variants like languages or platforms.
+title: "Tabs"
+description: "Organize content into tabbed interfaces with optional icons and smooth animated transitions."
 ---
 
-# Tabs
+## Overview
 
-Tabs group related variants like language or platform.
+The Tabs component creates an interactive tabbed interface with smooth animations and optional icons. Each tab has a title and supports any rich content, including text, code blocks, callouts, images, and other components. You can work with Tabs in two ways:
 
-## Example
+- Editor UI: Insert and manage tabs visually (no code required).
+- MDX: Use the `<Tabs>` and `<Tab>` components in your source files.
+Common use cases:
 
+- Platform-specific installation instructions
+- API examples in multiple programming languages
+- Feature documentation with different implementation options
+- Environment-specific configuration (dev, staging, prod)
+- Version-specific docs showing differences between releases
+## Using with Web Editor
+
+The Web Editor lets you insert and manage Tabs visually while still generating valid MDX under the hood.
+
+### Insert a Tabs block
+
+1. Place your cursor where you want the tabs to appear.
+2. Type / to open the command menu and search for Tabs.
+3. Select Tabs. A tabs block is added with two tabs created by default.
+- Prefer writing in code?
+- You can switch to MDX view inside the Web Editor to write or edit this component using the same syntax as the Code Editor.
+### Edit tab content
+
+- Title: Double-click the tab label you want to edit.
+- Content: Start typing in the content area below the tabs. You can add any rich content: text, lists, images, code blocks, callouts, cards, etc.
+### Manage tabs
+
+- Add a tab: Click the + button on the right side of the tab bar.
+- Remove a tab: Click the X icon on the tab you want to delete.
+- Rename a tab: Double-click the tab’s name and type a new label.
+Tabs created in the editor UI map directly to `<Tabs>` and `<Tab>` components in MDX.
+
+- In the editor UI, you add icons to tabs by asking the AI Agent in the editor to “add icons to each tab,” and it will update the Tabs block for you.
+## Using with Code Editor
+
+You can define Tabs directly in your MDX files using the `<Tabs>` and `<Tab>` components.
+
+### Basic syntax
+
+Use the `<Tabs>` component as a container with individual `<Tab>` components for each section:
+
+```jsx
 <Tabs>
   <Tab title="macOS" icon="apple">
     Install using Homebrew for the best experience on macOS.
-
     ```bash
     brew install documentation-ai
     ```
   </Tab>
   <Tab title="Windows" icon="monitor">
     Download and run the Windows installer from the releases page.
-
     ```bash
     winget install documentation-ai
     ```
   </Tab>
   <Tab title="Linux" icon="terminal">
     Use your package manager or download the binary directly.
-
     ```bash
     sudo apt install documentation-ai
     ```
   </Tab>
 </Tabs>
+```
+### Tab icons
 
-## Learn more
+Add visual context to tabs using Lucide icons for better recognition. Icon names use the Lucide icon library; reference the Lucide icon directory for all available options.
 
-Read the full Tabs guide at https://documentation.ai/docs/components/tabs.
+### Rich content support
+
+Tabs support any MDX content, including nested components, callouts, images, and complex layouts. You can nest Callout, Steps, code blocks, and lists inside any `<Tab>`.
+
+## Advanced options
+
+### Platform-specific instructions
+
+Create platform-specific guides that adapt to your users' operating systems, for example separate npm, pnpm, and Yarn tabs each containing install commands and package.json script examples.
+
+### Attributes
+
+Tabs component: The `<Tabs>` component acts as a container and has no configurable attributes. It automatically manages tab state and animations.
+
+Tab component:
+
+path title string Required
+
+The tab label displayed in the navigation bar. This text identifies each tab and should be concise and descriptive.
+
+path icon string
+
+Optional Lucide icon name to display alongside the tab title. Enhances visual recognition and improves user experience.
+
+path children node Required
+
+The content displayed when the tab is active. Supports all MDX content including text, code blocks, callouts, images, lists, tables, and other components.
+
+### Common patterns
+
+- Multi-language code samples: JavaScript, Python, Go, cURL, etc.
+- Platform guides: Windows, macOS, Linux install instructions.
+- Framework integrations: React, Vue, Angular, Svelte in separate tabs.
+- Environment configs: Dev, staging, production settings.
+- Version notes: v1, v2, v3 differences and migration tips.
+- Tabs include an animated underline indicator that moves with the active tab, giving users clear visual feedback about which content they’re viewing.

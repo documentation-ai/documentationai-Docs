@@ -1,27 +1,120 @@
 ---
-title: Steps
-description: 'Guide users through linear, task-based flows.'
+title: "Steps"
+description: "Display sequential instructions or processes with numbered or icon-based steps and connecting lines."
 ---
-# Steps
 
-Steps show a linear flow for setup and tutorials.
+## Overview
 
-## Example
+The Steps component creates visually connected step-by-step instructions with automatic numbering, optional icons, and rich content inside each step. You can add steps in two ways:
 
+- Editor UI: Insert Steps from the / commands menu and edit them visually (no code required).
+- MDX: Use the `<Steps>` and `<Step>` components directly in your content.
+Common use cases:
+
+- Installation and setup guides
+- Multi-step tutorials and onboarding flows
+- Process documentation showing workflow stages
+- Configuration guides and migration procedures
+## Using with Web Editor
+
+### Add a steps block
+
+1. Choose placement: click in the editor where you want the steps to appear.
+2. Open the command menu: type / to open the component picker and search for Steps.
+3. Insert the block: select Steps to add a steps block with the first step already created.
+- Prefer writing in code?
+- You can switch to MDX view inside the Web Editor to write or edit this component using the same syntax as the Code Editor.
+To add more steps:
+
+- Click the + button below the last step.
+- New steps are added with automatic numbering by default (1, 2, 3, …).
+### Edit the step title, icon, and heading level
+
+For each step:
+
+1. Click the three-dot menu on the right side of the step.
+2. In Step Settings:
+- Title: Change the step title text.
+- Icon (optional): Search for a Lucide icon (for example, check, arrow-right, database ) and select it. When you choose an icon, it replaces the number for that step.
+- Heading Level: Choose how the title should render: p – Paragraph style (default). h2 – Heading level 2. h3 – Heading level 3.
+Click Save to apply your changes.
+
+### Edit the step description
+
+- Click in the description area (“Description for this step…”) to edit it directly.
+- You can add any rich content inside the description: text, headings, lists, images and videos, code blocks and Code Groups, callouts, tables, expandables, and more.
+Each step behaves like a mini content section, so you can structure complex instructions clearly.
+
+## Using with Code Editor
+
+### Basic syntax
+
+Use the `<Steps>` component as a container with individual `<Step>` components for each instruction:
+
+```jsx
 <Steps>
-  <Step title="Install dependencies" icon="download" title-type="h3">
-    <Image src="https://blob-cdn.documentation.ai/org-a78a7fa2-dcee-40a8-b887-d5d5b2ded474/doc-d7fcf659-1ace-458b-b090-28a59ad7fe5d/1764909655551-g4llsbd5305-cursor_click.jpg?q=85&fm=auto&auto=compress%2Cformat" width="1652" height="1400" alt="" />
+  <Step title="Install dependencies" icon="download">
+    Run the installation command to add required packages to your project.
+    ```bash
+    npm install documentation-ai
+    ```
   </Step>
-
-  <Step title="Configure settings" icon="settings" title-type="h3">
+  <Step title="Configure settings" icon="settings">
     Create a configuration file in your project root with your API credentials.
   </Step>
-
-  <Step title="Deploy documentation" icon="rocket" title-type="h3">
+  <Step title="Deploy documentation" icon="rocket">
     Push your changes and deploy to production.
+    ```bash
+    npm run deploy
+    ```
   </Step>
 </Steps>
+```
+### Automatic numbering
 
-## Learn more
+Omit the icon attribute to display automatic sequential numbering. Automatic numbering is ideal for sequential processes where order matters and each step builds on the previous one.
 
-Read the full Steps guide at [https://documentation.ai/docs/components/steps](https://documentation.ai/docs/components/steps).
+### Custom icons
+
+Add visual context to each step using Lucide icons. Icon names use the Lucide icon library; reference the Lucide icon directory for available options.
+
+### Heading levels
+
+Control the semantic heading level of step titles using the title-type attribute, which accepts p, h2, or h3. Use appropriate heading levels to maintain proper document structure and improve SEO. Avoid skipping levels to maintain proper semantic structure.
+
+### Rich content support
+
+Steps support any MDX content, including code blocks, callouts, lists, and other components nested inside each `<Step>`.
+
+## Advanced options
+
+### Attributes
+
+Steps component: The `<Steps>` component acts as a container and has no configurable attributes. It automatically manages step numbering and layout.
+
+Step component:
+
+path title string Required
+
+The heading text displayed for this step. Serves as the main identifier for each instruction.
+
+path icon string
+
+Lucide icon name to display instead of automatic numbering. Omit this attribute to show sequential numbers.
+
+path title-type string
+
+The HTML heading level for the step title. Accepts: p, h2, or h3. Default: p.
+
+path children node Required
+
+The content of the step. Supports all MDX content including text, code blocks, callouts, lists, images, and other components.
+
+Common patterns:
+
+- Installation guides: Use numbered steps for clear sequential setup.
+- Configuration workflows: Combine icons, headings, and code blocks to guide users through complex configuration.
+- Migration procedures: Use heading levels and icons to represent phases (Plan → Migrate → Verify → Clean up).
+- Troubleshooting flows: Create “Check X, then Y, then Z” diagnostic sequences with clear visual indicators.
+- Onboarding sequences: Introduce features step by step with rich descriptions, screenshots, and links.
+- Steps automatically draw connecting lines between each step, giving your guides a polished, professional feel with no extra styling required.
